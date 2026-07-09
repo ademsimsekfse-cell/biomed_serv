@@ -1,0 +1,14 @@
+﻿Fejox BioServ Portable SetupWizard
+
+Bu paket kurulum gerektirmeden calisir.
+
+Kullanim:
+1. FejoxBioServ_Portable klasorunu herhangi bir bilgisayara veya USB diske kopyalayin.
+2. biomed_serv.exe dosyasini calistirin.
+3. Ilk kurulumda calisma yolu olarak varsayilan FejoxBioServ_Data\Workspace yolunu kullanabilirsiniz.
+4. Yedekler FejoxBioServ_Data\Workspace\Backups klasorune Excel/CSV ZIP olarak kaydedilir.
+
+Onemli:
+- FejoxBioServ_Data klasoru veritabanini ve yedekleri tasir.
+- USB ile tasirken bu klasoru uygulama dosyalariyla birlikte tutun.
+- Uygulama klasoru yazilabilir degilse uygulama kullanici Belgeler alanina guvenli sekilde duser.

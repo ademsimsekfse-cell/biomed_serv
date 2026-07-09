@@ -1,0 +1,17 @@
+Biomed Servis Desktop kurulduktan sonra uygulama ilk acilista kendi veri klasoru ayarini ister.
+
+Kurulum davranisi:
+- Ayni AppId kullanilir; yeni surumler mevcut kurulumu gunceller.
+- Onceki kurulum yolu varsa otomatik olarak tekrar kullanilir.
+- Kullanici isterse kurulum sirasinda baska klasor secebilir.
+- Yerel API icin TCP 8787 ve otomatik merkez kesfi icin UDP 8788 izinleri eklenir.
+- Guvenlik duvari izinleri yalnizca yerel alt ag ile sinirlidir.
+
+Veri ve yedekler:
+- Program dosyalari ile calisma verileri ayridir.
+- Uygulama icindeki ilk kurulum sihirbazi veri klasorunu ve yedek alanini ayarlar.
+- Otomatik yedekleme ZIP icinde Excel ve CSV dosyalari uretir.
+
+Guncelleme notu:
+- Yeni bir surum kuruldugunda ayni kurulum uzerine yazilir.
+- Eski kaldirip yeniden kurma gerekmez.

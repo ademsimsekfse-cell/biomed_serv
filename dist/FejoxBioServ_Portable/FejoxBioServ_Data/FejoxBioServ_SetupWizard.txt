@@ -1,0 +1,15 @@
+Fejox BioServ Portable SetupWizard
+
+Bu klasor Fejox BioServ'in tasinabilir veri alanidir.
+
+Klasorler:
+- Hive: Uygulamanin yerel veritabani
+- Workspace: Kurulumda onerilen calisma alani
+- Workspace\Backups: Excel/CSV ZIP yedekleri
+
+USB kullanimi:
+1. Fejox BioServ uygulama klasorunu komple USB diske kopyalayin.
+2. Uygulamayi USB uzerindeki .exe dosyasindan calistirin.
+3. FejoxBioServ_Data klasorunu silmeyin; veriler burada tasinir.
+
+Not: Uygulama klasoru yazilabilir degilse veri alani kullanici Belgeler klasorune tasinir.
