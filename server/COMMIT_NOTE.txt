@@ -1,0 +1,9 @@
+Update: added server/ scaffold (NestJS minimal) and client-side SyncService + Hive helper.
+
+What I changed:
+- server/: NestJS scaffold with Dockerfile, docker-compose (Postgres + MinIO), basic controllers for auth/sync/backups
+- lib/services/sync_service.dart: basic SyncService HTTP client wrapper
+- lib/services/hive_platform_helper.dart: helper to initialize Hive differently on web vs native
+
+Next I will:
+- If you want, I can update main.dart to call ensureHiveInitialized() instead of Hive.init(...) so web will be safe. Confirm if you want me to overwrite main.dart.
