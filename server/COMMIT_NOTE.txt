@@ -1,4 +1,4 @@
-Update: added server/ scaffold (NestJS minimal) and client-side SyncService + Hive helper.
+Update: added server/ scaffold (NestJS) and client-side SyncService + Hive helper.
 
 What I changed:
 - server/: NestJS scaffold with Dockerfile, docker-compose (Postgres + MinIO), basic controllers for auth/sync/backups
