@@ -1,0 +1,12 @@
+Update: Integrated SyncController with DbService, added StorageService (MinIO wrapper) and presign/put flow, updated AppModule providers, and added client-side sync_integration example.
+
+What I changed:
+- server/src/controllers/sync.controller.ts now persists incoming changes to Postgres via DbService and returns applied mapping.
+- server/src/services/storage.service.ts added (MinIO client wrapper) and BackupsController uses it for file upload/presign.
+- server/src/app.module.ts updated to register StorageService.
+- lib/services/sync_integration.dart added to show how to enqueue changes and process outbox using SyncService & OutboxService.
+
+Next automatic steps I'll run:
+1) Add simple auth guard middleware (token validation) to protect sync endpoints.
+2) Add client-side example to hook ServiceForm saving to enqueue changes (optional integration into providers).
+3) Add README updates and run smoke tests in docker-compose.

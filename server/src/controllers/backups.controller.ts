@@ -1,13 +1,32 @@
-import { Controller, Post, UploadedFile, UseInterceptors, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseInterceptors, Body, Get, Param, BadRequestException } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { StorageService } from '../services/storage.service';
 
 @Controller('backups')
 export class BackupsController {
+  constructor(private readonly storage: StorageService) {}
+
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async upload(@UploadedFile() file: Express.Multer.File, @Body() body: any) {
-    // Scaffold: in production you would stream to S3/MinIO and create backup record
-    return { status: 'ok', filename: file?.originalname };
+    if (!file) throw new BadRequestException('No file uploaded');
+    // Store object into MinIO synchronously (for scaffold)
+    const bucket = process.env.MINIO_BUCKET || 'biomed-backups';
+    const key = `backups/${Date.now()}_${file.originalname}`;
+    await this.storage.putObject(bucket, key, file.buffer);
+    const url = await this.storage.getObjectUrl(bucket, key);
+    return { status: 'ok', filename: file.originalname, url };
+  }
+
+  @Get('presign')
+  async presign(@Body() body: any) {
+    // Body: { filename }
+    const filename = body?.filename;
+    if (!filename) throw new BadRequestException('filename required');
+    const bucket = process.env.MINIO_BUCKET || 'biomed-backups';
+    const key = `backups/${Date.now()}_${filename}`;
+    const presigned = await this.storage.presignPut(bucket, key, 60 * 5); // 5 minutes
+    return { url: presigned, key };
   }
 
   @Get(':id/download')
