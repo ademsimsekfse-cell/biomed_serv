@@ -1,0 +1,5 @@
+Update: added AuthGuard (server) to protect sync/backups endpoints, and OutboxSyncWorker (client) for connectivity-driven automatic syncing. README updated with auth usage notes.
+
+Next I'll:
+- Add example integration in a provider to enqueue changes on form creation (optional: target a specific provider file) and start the OutboxSyncWorker during app startup.
+- Implement conflict response handling and a simple UI notification flow.

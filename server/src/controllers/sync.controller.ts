@@ -1,22 +1,15 @@
-import { Controller, Post, Body, Get, Query, Headers, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { DbService } from '../services/db.service';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('sync')
 export class SyncController {
   constructor(private readonly db: DbService) {}
 
   @Post('push')
-  async push(@Headers('authorization') auth: string, @Body() body: any) {
-    // Simple dev auth: require Authorization header
-    if (!auth || !auth.startsWith('Bearer ')) {
-      throw new UnauthorizedException('Missing Authorization token');
-    }
-    const token = auth.split(' ')[1];
-    // Dev stub: accept fake token 'fake_access_token_for_dev' or any token in dev
-    if (process.env.NODE_ENV !== 'development' && token !== process.env.JWT_SECRET) {
-      throw new UnauthorizedException('Invalid token');
-    }
-
+  async push(@Body() body: any) {
     const clientId = body.client_id || null;
     const changes = body.changes || [];
     const applied = [] as any[];

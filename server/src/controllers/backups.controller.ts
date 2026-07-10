@@ -1,7 +1,10 @@
 import { Controller, Post, UploadedFile, UseInterceptors, Body, Get, Param, BadRequestException } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StorageService } from '../services/storage.service';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('backups')
 export class BackupsController {
   constructor(private readonly storage: StorageService) {}
@@ -18,7 +21,7 @@ export class BackupsController {
     return { status: 'ok', filename: file.originalname, url };
   }
 
-  @Get('presign')
+  @Post('presign')
   async presign(@Body() body: any) {
     // Body: { filename }
     const filename = body?.filename;
