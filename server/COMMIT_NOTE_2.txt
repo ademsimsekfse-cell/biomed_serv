@@ -1,0 +1,14 @@
+Update: added DB service (Postgres wrapper) and OutboxService + main.dart hive init switched to platform-aware helper.
+
+Changes:
+- lib/main.dart: replaced Hive.init with ensureHiveInitialized(nativePath: hivePath)
+- lib/services/outbox_service.dart: new outbox implementation using Hive box 'outbox'
+- server/src/services/db.service.ts: added DbService that connects to Postgres and ensures change_logs table
+- server/src/app.module.ts: registered DbService provider
+
+Next steps I will perform automatically in order:
+1) Add simple auth token validation middleware and connect sync.controller to DbService so incoming push changes are persisted.
+2) Add client-side outbox usage in DatabaseService or example integration where forms/changes enqueue to outbox.
+3) Add migration / README notes for running locally.
+
+If you'd like me to proceed, I'll commit these updates now.
